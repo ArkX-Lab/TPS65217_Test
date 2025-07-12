@@ -1,0 +1,5 @@
+Record=TopLevelDocument|FileName=Connector.SchDoc|SheetNumber=5
+Record=NoMainPathDocument|SourceDocument=Connector.SchDoc|FileName=Index.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=Connector.SchDoc|FileName=MCU.SchDoc|SheetNumber=4
+Record=NoMainPathDocument|SourceDocument=Connector.SchDoc|FileName=Overview.SchDoc|SheetNumber=2
+Record=NoMainPathDocument|SourceDocument=Connector.SchDoc|FileName=TPS65217DRSLR.SchDoc|SheetNumber=3
