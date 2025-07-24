@@ -143,7 +143,41 @@ GenerateClassCluster=0
 DocumentUniqueId=DHSTVWSJ
 
 [Document7]
-DocumentPath=TPS65217_Test_Bd.OutJob
+DocumentPath=Job1.OutJob
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=
+
+[Document8]
+DocumentPath=CAMtastic1.Cam
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=
+
+[Document9]
+DocumentPath=CAMtastic2.Cam
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -160,7 +194,139 @@ GenerateClassCluster=0
 DocumentUniqueId=
 
 [GeneratedDocument1]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\BOM\Bill of Materials-TPS65217_Test_Bd.xlsx
+DItemRevisionGUID=
+
+[GeneratedDocument2]
 DocumentPath=Project Outputs for TPS65217_Test_Bd\Design Rule Check - TPS65217_Test_Bd.html
+DItemRevisionGUID=
+
+[GeneratedDocument3]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Pick Place\Pick Place for TPS65217_Test_Bd.csv
+DItemRevisionGUID=
+
+[GeneratedDocument4]
+DocumentPath=Project Outputs for Free Documents\Pick Place\Pick Place for TPS65217_Test_Bd.txt
+DItemRevisionGUID=
+
+[GeneratedDocument5]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Pick Place\Pick Place for TPS65217_Test_Bd.txt
+DItemRevisionGUID=
+
+[GeneratedDocument6]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\NC Drill\TPS65217_Test_Bd-RectHoles.TXT
+DItemRevisionGUID=
+
+[GeneratedDocument7]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\NC Drill\TPS65217_Test_Bd.DRR
+DItemRevisionGUID=
+
+[GeneratedDocument8]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.EXTREP
+DItemRevisionGUID=
+
+[GeneratedDocument9]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.G1
+DItemRevisionGUID=
+
+[GeneratedDocument10]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.G2
+DItemRevisionGUID=
+
+[GeneratedDocument11]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.G3
+DItemRevisionGUID=
+
+[GeneratedDocument12]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.G4
+DItemRevisionGUID=
+
+[GeneratedDocument13]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GBL
+DItemRevisionGUID=
+
+[GeneratedDocument14]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GBO
+DItemRevisionGUID=
+
+[GeneratedDocument15]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GBP
+DItemRevisionGUID=
+
+[GeneratedDocument16]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GBS
+DItemRevisionGUID=
+
+[GeneratedDocument17]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GD1
+DItemRevisionGUID=
+
+[GeneratedDocument18]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GG1
+DItemRevisionGUID=
+
+[GeneratedDocument19]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GKO
+DItemRevisionGUID=
+
+[GeneratedDocument20]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GM1
+DItemRevisionGUID=
+
+[GeneratedDocument21]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GM2
+DItemRevisionGUID=
+
+[GeneratedDocument22]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GM3
+DItemRevisionGUID=
+
+[GeneratedDocument23]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GM13
+DItemRevisionGUID=
+
+[GeneratedDocument24]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GM15
+DItemRevisionGUID=
+
+[GeneratedDocument25]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GPB
+DItemRevisionGUID=
+
+[GeneratedDocument26]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GPT
+DItemRevisionGUID=
+
+[GeneratedDocument27]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GTL
+DItemRevisionGUID=
+
+[GeneratedDocument28]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GTO
+DItemRevisionGUID=
+
+[GeneratedDocument29]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GTP
+DItemRevisionGUID=
+
+[GeneratedDocument30]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.GTS
+DItemRevisionGUID=
+
+[GeneratedDocument31]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\NC Drill\TPS65217_Test_Bd.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument32]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.REP
+DItemRevisionGUID=
+
+[GeneratedDocument33]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\Gerber\TPS65217_Test_Bd.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument34]
+DocumentPath=Project Outputs for TPS65217_Test_Bd\NC Drill\TPS65217_Test_Bd.TXT
 DItemRevisionGUID=
 
 [Configuration1]
