@@ -34,6 +34,7 @@
 #define MCU_GPIO_PA_X_Pin		MCU_GPIO_PA5_Pin
 #define I2C1_SLAVE_ADDR 		(0x24 << 1)
 #define REG_ADDR_CHIP_ID		(0x00)
+#define REG_ADDR_INT			(0x02)
 #define REG_ADDR_PASSWD			(0x0B)
 #define REG_ADDR_ENABLE			(0x16)
 #define REG_ADDR_SEQ6			(0x1E)
@@ -52,6 +53,7 @@ I2C_HandleTypeDef hi2c1;
 uint8_t tx_buffer = 0;
 uint8_t rx_buffer = 0;
 uint8_t	chip_id = 0;
+uint8_t int_status = 0;
 uint8_t reg_enable = 0;
 uint8_t reg_seq6 = 0;
 
@@ -103,6 +105,9 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
+  // Wait for TPS65217's Power-Up Sequence
+  HAL_Delay(3000);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -112,53 +117,48 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	HAL_GPIO_WritePin(MCU_GPIO_PA5_GPIO_Port, MCU_GPIO_PA5_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(MCU_GPIO_PA5_GPIO_Port, MCU_GPIO_PA6_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(MCU_GPIO_PA5_GPIO_Port, MCU_GPIO_PA7_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(MCU_GPIO_PA5_GPIO_Port, MCU_GPIO_PA8_Pin, GPIO_PIN_SET);
-	HAL_Delay(1000);
-	HAL_GPIO_WritePin(MCU_GPIO_PA5_GPIO_Port, MCU_GPIO_PA5_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(MCU_GPIO_PA5_GPIO_Port, MCU_GPIO_PA6_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(MCU_GPIO_PA5_GPIO_Port, MCU_GPIO_PA7_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(MCU_GPIO_PA5_GPIO_Port, MCU_GPIO_PA8_Pin, GPIO_PIN_RESET);
-	HAL_Delay(1000);
-
-	//////////// 1. Read Chip ID
-	HAL_I2C_Mem_Read(&hi2c1, I2C1_SLAVE_ADDR, REG_ADDR_CHIP_ID, 1, &rx_buffer, 1, HAL_MAX_DELAY);
-	chip_id = rx_buffer;
-
-	//////////// 2. Read Enable Register
-	HAL_I2C_Mem_Read(&hi2c1, I2C1_SLAVE_ADDR, REG_ADDR_ENABLE, 1, &rx_buffer, 1, HAL_MAX_DELAY);
-	reg_enable = rx_buffer;
-
-	//////////// 3. Read SEQ6 Register
-	HAL_I2C_Mem_Read(&hi2c1, I2C1_SLAVE_ADDR, REG_ADDR_SEQ6, 1, &rx_buffer, 1, HAL_MAX_DELAY);
-	reg_seq6 = rx_buffer;
-	HAL_Delay(1);
-
-	//////////// 4. Initialize SEQ Down
-	// 4-1. Password Register Write
-	reg_passwd = REG_ADDR_SEQ6 ^ 0x7D;
-	tx_buffer = reg_passwd;
-	HAL_I2C_Mem_Write(&hi2c1, I2C1_SLAVE_ADDR, REG_ADDR_PASSWD, 1, &tx_buffer, 1, HAL_MAX_DELAY);
-
-	// 4-2. Set SEQDWN bit
-	tx_buffer = reg_seq6 | 0x02;
-	HAL_I2C_Mem_Write(&hi2c1, I2C1_SLAVE_ADDR, REG_ADDR_SEQ6, 1, &tx_buffer, 1, HAL_MAX_DELAY);
-	HAL_Delay(100);
+  
+    // 1. Read Chip ID
+    HAL_I2C_Mem_Read(&hi2c1, I2C1_SLAVE_ADDR, REG_ADDR_CHIP_ID, 1, &rx_buffer, 1, HAL_MAX_DELAY);
+    chip_id = rx_buffer;
+	  HAL_Delay(100);
 
 
-	//////////// 5. Enable All Rails
-	// 5-1. Password Register Write
-	reg_passwd = REG_ADDR_ENABLE ^ 0x7D;
-	tx_buffer = reg_passwd;
-	HAL_I2C_Mem_Write(&hi2c1, I2C1_SLAVE_ADDR, REG_ADDR_PASSWD, 1, &tx_buffer, 1, HAL_MAX_DELAY);
+    // 2. Read Enable Register
+    HAL_I2C_Mem_Read(&hi2c1, I2C1_SLAVE_ADDR, REG_ADDR_ENABLE, 1, &rx_buffer, 1, HAL_MAX_DELAY);
+    reg_enable = rx_buffer;
+	  HAL_Delay(100);
 
-	// 5-2. Enable Register Write
-	tx_buffer = 0x7F;
-	HAL_I2C_Mem_Write(&hi2c1, I2C1_SLAVE_ADDR, REG_ADDR_ENABLE, 1, &tx_buffer, 1, HAL_MAX_DELAY);
 
-	HAL_Delay(100);
+    // 3. Disable Rail : LDO1
+    // 3-1. Write Password Register
+    reg_passwd = REG_ADDR_ENABLE ^ 0x7D;
+    tx_buffer = reg_passwd;
+    HAL_I2C_Mem_Write(&hi2c1, I2C1_SLAVE_ADDR, REG_ADDR_PASSWD, 1, &tx_buffer, 1, HAL_MAX_DELAY);
+    HAL_Delay(50);
+
+    // 3-2. Write Enable Register
+    tx_buffer = reg_enable & ~((0x1 << 1) | (0x1 << 4));
+    HAL_I2C_Mem_Write(&hi2c1, I2C1_SLAVE_ADDR, REG_ADDR_ENABLE, 1, &tx_buffer, 1, HAL_MAX_DELAY);
+    HAL_Delay(50);
+
+    // Wait 1[sec]
+    HAL_Delay(1000);
+
+    // 5. Enable Rail : LDO1
+    // 5-1. Write Password Register
+    reg_passwd = REG_ADDR_ENABLE ^ 0x7D;
+    tx_buffer = reg_passwd;
+    HAL_I2C_Mem_Write(&hi2c1, I2C1_SLAVE_ADDR, REG_ADDR_PASSWD, 1, &tx_buffer, 1, HAL_MAX_DELAY);
+    HAL_Delay(50);
+
+    // 5-2. Write Enable Register
+    tx_buffer = reg_enable | ((0x1 << 1) | (0x1 << 4));
+    HAL_I2C_Mem_Write(&hi2c1, I2C1_SLAVE_ADDR, REG_ADDR_ENABLE, 1, &tx_buffer, 1, HAL_MAX_DELAY);
+    HAL_Delay(50);
+
+    // Wait 1[sec]
+    HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
@@ -266,6 +266,18 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, MCU_GPIO_PA5_Pin|MCU_GPIO_PA6_Pin|MCU_GPIO_PA7_Pin|MCU_GPIO_PA8_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : MCU_PMIC_PWR_EN_Pin MCU_PMIC_PGOOD_Pin MCU_PMIC_LDO_PGOOD_Pin MCU_PMIC_nWAKEUP_Pin */
+  GPIO_InitStruct.Pin = MCU_PMIC_PWR_EN_Pin|MCU_PMIC_PGOOD_Pin|MCU_PMIC_LDO_PGOOD_Pin|MCU_PMIC_nWAKEUP_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : MCU_PMIC_nINT_Pin */
+  GPIO_InitStruct.Pin = MCU_PMIC_nINT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(MCU_PMIC_nINT_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : MCU_GPIO_PA5_Pin MCU_GPIO_PA6_Pin MCU_GPIO_PA7_Pin MCU_GPIO_PA8_Pin */
   GPIO_InitStruct.Pin = MCU_GPIO_PA5_Pin|MCU_GPIO_PA6_Pin|MCU_GPIO_PA7_Pin|MCU_GPIO_PA8_Pin;

@@ -57,6 +57,16 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define MCU_PMIC_PWR_EN_Pin GPIO_PIN_0
+#define MCU_PMIC_PWR_EN_GPIO_Port GPIOA
+#define MCU_PMIC_PGOOD_Pin GPIO_PIN_1
+#define MCU_PMIC_PGOOD_GPIO_Port GPIOA
+#define MCU_PMIC_LDO_PGOOD_Pin GPIO_PIN_2
+#define MCU_PMIC_LDO_PGOOD_GPIO_Port GPIOA
+#define MCU_PMIC_nINT_Pin GPIO_PIN_3
+#define MCU_PMIC_nINT_GPIO_Port GPIOA
+#define MCU_PMIC_nWAKEUP_Pin GPIO_PIN_4
+#define MCU_PMIC_nWAKEUP_GPIO_Port GPIOA
 #define MCU_GPIO_PA5_Pin GPIO_PIN_5
 #define MCU_GPIO_PA5_GPIO_Port GPIOA
 #define MCU_GPIO_PA6_Pin GPIO_PIN_6
